@@ -5,7 +5,7 @@ const resources = {
   'zh-CN': {
     translation: {
       app: { name: '冰箱管家', shortName: '冰箱管家' },
-      nav: { home: '首页', foods: '食物', add: '录入', stats: '统计', settings: '设置', fridge: '冰箱' },
+      nav: { home: '首页', foods: '冰箱', add: '录入', stats: '统计', settings: '设置' },
       home: {
         title: '冰箱概览',
         total: '总食物',
@@ -173,7 +173,7 @@ const resources = {
   'en': {
     translation: {
       app: { name: 'Fridge Manager', shortName: 'Fridge' },
-      nav: { home: 'Home', foods: 'Foods', add: 'Add', stats: 'Stats', settings: 'Settings', fridge: 'Fridge' },
+      nav: { home: 'Home', foods: 'Fridge', add: 'Add', stats: 'Stats', settings: 'Settings' },
       home: {
         title: 'Fridge Overview',
         total: 'Total',

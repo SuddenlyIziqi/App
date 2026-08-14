@@ -14,20 +14,14 @@ export default function SettingsPage() {
   const areas = useStore(s => s.areas);
   const addCategory = useStore(s => s.addCategory);
   const deleteCategory = useStore(s => s.deleteCategory);
-  const addArea = useStore(s => s.addArea);
-  const deleteArea = useStore(s => s.deleteArea);
   const selectFridgeModel = useStore(s => s.selectFridgeModel);
   const exportData = useStore(s => s.exportData);
   const importData = useStore(s => s.importData);
   const clearAllData = useStore(s => s.clearAllData);
 
   const [showAddCat, setShowAddCat] = useState(false);
-  const [showAddArea, setShowAddArea] = useState(false);
   const [newCatName, setNewCatName] = useState('');
   const [newCatIcon, setNewCatIcon] = useState('🍽️');
-  const [newAreaName, setNewAreaName] = useState('');
-  const [newAreaIcon, setNewAreaIcon] = useState('📦');
-  const [newAreaTemp, setNewAreaTemp] = useState(4);
   const [showFridgeModels, setShowFridgeModels] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -101,21 +95,6 @@ export default function SettingsPage() {
     });
     setNewCatName('');
     setShowAddCat(false);
-  };
-
-  // 添加区域
-  const handleAddArea = async () => {
-    if (!newAreaName.trim()) return;
-    await addArea({
-      name: newAreaName,
-      nameEn: newAreaName,
-      icon: newAreaIcon,
-      temperature: newAreaTemp,
-      sortOrder: areas.length + 1,
-      isPreset: false,
-    });
-    setNewAreaName('');
-    setShowAddArea(false);
   };
 
   return (
@@ -201,27 +180,18 @@ export default function SettingsPage() {
           )}
         </div>
 
-        {/* 冰箱区域管理 */}
+        {/* 冰箱区域提示 */}
         <div className="card">
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="section-title mb-0">🧊 {t('area.title')}</h3>
-            <button onClick={() => setShowAddArea(true)} className="text-primary-500 text-sm">+ {t('area.add')}</button>
-          </div>
-          <div className="space-y-2">
+          <h3 className="section-title">🧊 {isEn ? 'Fridge Zones' : '冰箱区域'}</h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+            {isEn ? 'Go to "Foods" page and tap "Edit" to manage zones (rename, set temperature, add/remove)' : '前往「食物」页面，点击「编辑」按钮管理区域（改名、设温度、添加/删除）'}
+          </p>
+          <div className="flex flex-wrap gap-2">
             {areas.map(area => (
-              <div key={area.id} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">{area.icon}</span>
-                  <span className="text-sm font-medium">{area.name}</span>
-                  {area.temperature !== undefined && (
-                    <span className="text-xs text-gray-400">{area.temperature}°C</span>
-                  )}
-                </div>
-                {!area.isPreset && (
-                  <button onClick={() => deleteArea(area.id)} className="text-danger-400 text-xs">
-                    {t('common.delete')}
-                  </button>
-                )}
+              <div key={area.id} className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg px-2 py-1">
+                <span>{area.icon}</span>
+                <span className="text-xs">{isEn ? area.nameEn : area.name}</span>
+                {area.temperature !== undefined && <span className="text-xs text-gray-400">{area.temperature}°C</span>}
               </div>
             ))}
           </div>
@@ -330,32 +300,6 @@ export default function SettingsPage() {
         </div>
       )}
 
-      {/* 添加区域弹窗 */}
-      {showAddArea && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end">
-          <div className="bg-white dark:bg-gray-800 w-full rounded-t-3xl p-6 animate-slide-up">
-            <h2 className="text-lg font-bold mb-4">{t('area.add')}</h2>
-            <div className="space-y-3">
-              <div>
-                <label className="text-sm text-gray-500 mb-1 block">{t('area.icon')}</label>
-                <input type="text" value={newAreaIcon} onChange={e => setNewAreaIcon(e.target.value)} className="input-field w-20 text-center text-2xl" />
-              </div>
-              <div>
-                <label className="text-sm text-gray-500 mb-1 block">{t('area.name')}</label>
-                <input type="text" value={newAreaName} onChange={e => setNewAreaName(e.target.value)} className="input-field" />
-              </div>
-              <div>
-                <label className="text-sm text-gray-500 mb-1 block">{t('area.temperature')}</label>
-                <input type="number" value={newAreaTemp} onChange={e => setNewAreaTemp(parseInt(e.target.value) || 0)} className="input-field" />
-              </div>
-              <div className="flex gap-3">
-                <button onClick={() => setShowAddArea(false)} className="btn-secondary flex-1">{t('common.cancel')}</button>
-                <button onClick={handleAddArea} className="btn-primary flex-1">{t('common.add')}</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

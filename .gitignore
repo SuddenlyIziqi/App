@@ -10,6 +10,10 @@ android-sdk/
 # APK files (too large for GitHub)
 *.apk
 
+# Signing keys (sensitive, do not commit)
+*.jks
+*.keystore
+
 # Android build artifacts
 android/.gradle/
 android/app/build/

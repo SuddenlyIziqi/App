@@ -9,7 +9,6 @@ import FoodDetailPage from './pages/FoodDetailPage';
 import StatsPage from './pages/StatsPage';
 import SettingsPage from './pages/SettingsPage';
 import HistoryPage from './pages/HistoryPage';
-import FridgeViewPage from './pages/FridgeViewPage';
 
 function Layout() {
   const { t } = useTranslation();
@@ -40,7 +39,7 @@ function Layout() {
   }, []);
 
   const expiringCount = foods.filter(f => f.status === 'expiring' || f.status === 'expired').length;
-  const isHidden = location.pathname.startsWith('/food/') || location.pathname === '/history' || location.pathname === '/fridge';
+  const isHidden = location.pathname.startsWith('/food/') || location.pathname === '/history';
 
   return (
     <div className="min-h-screen bg-primary-50 dark:bg-gray-900">
@@ -53,7 +52,6 @@ function Layout() {
           <Route path="/stats" element={<StatsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/history" element={<HistoryPage />} />
-          <Route path="/fridge" element={<FridgeViewPage />} />
         </Routes>
       </main>
 
@@ -67,10 +65,6 @@ function Layout() {
             <NavLink to="/foods" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : 'nav-item-inactive'}`}>
               <span className="text-xl">📦</span>
               <span>{t('nav.foods')}</span>
-            </NavLink>
-            <NavLink to="/fridge" className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : 'nav-item-inactive'}`}>
-              <span className="text-xl">🧊</span>
-              <span>{t('nav.fridge')}</span>
             </NavLink>
             <NavLink to="/add" className="nav-item relative">
               <span className="absolute -top-2 bg-primary-500 text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl shadow-lg">
