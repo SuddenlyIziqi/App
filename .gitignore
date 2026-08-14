@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local Android SDK (do not commit)
+android-sdk/
+
+# APK files (too large for GitHub)
+*.apk
+
+# Android build artifacts
+android/.gradle/
+android/app/build/
+android/build/
+android/capacitor-cordova-android-plugins/build/
+android/local.properties
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Qoder specs
+.qoder/
+
+# Capacitor local settings
+android/capacitor.settings.gradle

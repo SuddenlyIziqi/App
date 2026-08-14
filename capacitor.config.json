@@ -1,0 +1,13 @@
+{
+  "appId": "com.fridgemanager.app",
+  "appName": "冰箱管家",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  }
+}
